@@ -13,22 +13,23 @@ def parse(j):
     json_array = json.loads(j)
     openings = []
     for j in json_array:
-        o = Opening(
-            {"circleName": j["circleName"],
-             "nextOpeningDate": j["nextOpeningDate"],
-             "orderable": j["orderable"]
-             }
-        )
-        if o not in openings and o.__dict__.get("orderable") == True:
-            openings.append(o)
+        try:
+            o = Opening(
+                {"circleName": j["circleName"],
+                 "nextOpeningDate": j["nextOpeningDate"]
+                 }
+            )
+            if o not in openings and j["orderable"]:
+                openings.append(o)
+        except Exception:
+            pass
     return openings
-
 
 class Opening(object):
     def __init__(self, j):
         self.__dict__ = j
         self.__dict__.update(
-            {'nextOpeningDate': strftime('%Y-%m-%d %H:%M:%S', datetime.fromtimestamp(
+            {'nextOpeningDate': strftime('**(%A)** %Y. %m. %d. %H:%M', datetime.fromtimestamp(
                 self.__dict__.get("nextOpeningDate") / 1000, tz=pytz.timezone('Etc/GMT-1')).timetuple())
              }
         )
