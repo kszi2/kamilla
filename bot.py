@@ -20,8 +20,8 @@ def start():
 
 
 def command_latency():
-    @kamilla.command(description="Tests basic behavior.")  # this decorator makes a slash command
-    async def ping(ctx):  # a slash command will be created with the name "ping"
+    @kamilla.command(description="Tests basic behavior.")
+    async def ping(ctx):
         reply = discord.Embed(title="Pong!",
                               description=f"Latency is {int(round(kamilla.latency * 1000, 0))}ms.",
                               color=0xffccee)
@@ -30,8 +30,8 @@ def command_latency():
 
 
 def command_opening():
-    @kamilla.command(description="Displays the current SchWaiter openings.")  # this decorator makes a slash command
-    async def opening(ctx):  # a slash command will be created with the name "ping"
+    @kamilla.command(description="Displays the current SchWaiter openings.")
+    async def opening(ctx):
         openings = schpincer.parse(schpincer.fetch('https://schpincer.sch.bme.hu/api/items/now'))
 
         fields = []
