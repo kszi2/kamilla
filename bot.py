@@ -37,7 +37,7 @@ def command_opening():
         fields = []
         for o in openings:
             fields.append(EmbedField(name=o.__dict__.get("circleName") + " :green_circle:",
-                                     value=f"{o.__dict__.get("nextOpeningDate")}"))
+                                     value=f"{o.__dict__.get('nextOpeningDate')}")) # FIXME date
             fields.append(EmbedField(name="", value=""))
 
         reply = discord.Embed(title="🍴 Openings",

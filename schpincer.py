@@ -1,8 +1,5 @@
-import pytz
 import requests
 import json
-from datetime import datetime
-from time import strftime
 
 
 def fetch(url):
@@ -28,15 +25,15 @@ def parse(j):
 class Opening(object):
     def __init__(self, j):
         self.__dict__ = j
-        self.__dict__.update(
-            {'nextOpeningDate': strftime('**(%A)** %Y. %m. %d. %H:%M', datetime.fromtimestamp(
-                self.__dict__.get("nextOpeningDate") / 1000, tz=pytz.timezone('Etc/GMT-1')).timetuple())
-             }
-        )
+        # self.__dict__.update(
+        #     {'nextOpeningDate': strftime('**(%A)** %Y. %m. %d. %H:%M', datetime.fromtimestamp(
+        #         self.__dict__.get("nextOpeningDate") / 1000, tz=pytz.timezone('Etc/GMT-1')).timetuple())
+        #      }
+        # )
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
-            return self.__dict__.get("circleName") == other.__dict__.get("circleName")
+            return self.__dict__.get("circleName") == other.__dict__.get("circleName") and self.__dict__.get("nextOpeningDate") == other.__dict__.get("nextOpeningDate")
         else:
             return False
 

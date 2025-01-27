@@ -9,8 +9,9 @@ class Logger:
             format="[{asctime}][{levelname}] {message}",
             style="{",
             datefmt="%Y-%m-%d %H:%M:%S",
-            level=logging.DEBUG
+            level=self.level,
         )
+
 
     def log(self, message):
         """Log a message with a timestamp."""
